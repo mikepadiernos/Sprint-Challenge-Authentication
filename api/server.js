@@ -8,18 +8,20 @@ const jokesRouter = require('../jokes/jokes-router.js');
 
 const middle = require('../auth/auth-middleware.js');
 
-const authenticate = middle.authenticator;
+const auth = middle.authenticator;
 
 const server = express();
 
 server.use(
 	helmet(),
-	morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length]'),
+	morgan(':method :url :status :response-time ms - :res[content-length]'),
 	cors(),
 	express.json()
 );
 
 server.use('/api/auth', authRouter);
-server.use('/api/jokes', authenticate, jokesRouter);
+server.use('/auth', authRouter);
+server.use('/api/jokes', auth, jokesRouter);
+server.use('/jokes', auth, jokesRouter);
 
 module.exports = server;

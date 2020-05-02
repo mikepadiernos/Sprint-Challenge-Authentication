@@ -6,6 +6,15 @@ const db = require('./auth-helper.js');
 const middle = require('./auth-middleware.js');
 
 const generate = middle.generator;
+const auth = middle.authenticator;
+
+router.get('/', auth, (req, res) => {
+		db.getAll()
+			.then(users => res.status(201).json(users))
+			.catch(error => {
+				res.status(500).json({ success: false, message: "Unable to find users", error });
+			});
+	});
 
 router.post('/register', (req, res) => {
   // implement registration

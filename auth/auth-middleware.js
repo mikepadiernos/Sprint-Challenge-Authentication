@@ -5,12 +5,12 @@
 const jwt = require('jsonwebtoken');
 const secret = require('./auth-secret.js');
 
- const authenticator = (req, res, next) => {
+const authenticator = (req, res, next) => {
   const token = req.headers.authorization;
 
   token
     ?  jwt.verify(token, secret.jwtSecret, (error, decodedToken) => {
-        token
+        error
           ? res.status(401).json({ you: 'shall not pass!' })
           : req.decodedToken = decodedToken && next();
       })
