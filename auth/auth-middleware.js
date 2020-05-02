@@ -5,7 +5,7 @@
 const jwt = require('jsonwebtoken');
 const secret = require('./auth-secret.js');
 
-module.exports = (req, res, next) => {
+ const restrictor = (req, res, next) => {
   const token = req.headers.authorization;
 
   token
@@ -16,3 +16,19 @@ module.exports = (req, res, next) => {
       })
     : res.status(401).json({ you: 'can\'t touch this!' });
 };
+
+const generator = function genToken(user) {
+   const payload = {
+     userid: user.id,
+     username: user.username,
+   };
+   const options = { expiresIn: '1h' };
+   const token = jwt.sign(payload, secret.jwtSecret, options);
+
+   return token;
+ }
+
+module.exports = {
+  restrictor,
+  generator
+}
