@@ -1,12 +1,15 @@
 const router = require('express').Router();
 const bc = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
 const db = require('./auth-helper.js');
 const middle = require('./auth-middleware.js');
 
 const generate = middle.generator;
 const auth = middle.authenticator;
+
+// router.get("/", (req, res) => {
+// 	res.status(200).json({ api: "up" });
+// });
 
 router.get('/', auth, (req, res) => {
 		db.getAll()
