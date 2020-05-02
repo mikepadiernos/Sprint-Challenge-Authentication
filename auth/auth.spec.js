@@ -22,8 +22,7 @@ describe('Testing Auth Router', () => {
 			expect(res.status).toBe(500);
 		})
 		it('should return 201', async () => {
-			return request(server)
-				.post('/api/auth/register')
+			return request(server).post('/api/auth/register')
 				.send({username: 'first', password: 'first'})
 				.then(res => {expect(res.status).toBe(201)})
 		});
@@ -34,8 +33,7 @@ describe('Testing Auth Router', () => {
 			expect(res.status).toBe(500);
 		})
 		it('should return 201 after login', async () => {
-			return request(server)
-				.post('/api/auth/login')
+			return request(server).post('/api/auth/login')
 				.send({username: '', password: ''})
 				.then(res => {expect(res.status).toBe(401)})
 		});
