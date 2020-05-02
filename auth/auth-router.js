@@ -14,7 +14,8 @@ router.post('/register', (req, res) => {
 
 	db.add(user)
 		.then(user => {
-			res.status(201).json({success: true, message: "Registered User", user});
+			const token = generate(user);
+			res.status(201).json({success: true, message: "Registered User", user, token});
 		})
 		.catch(error => {res.status(500).json({success: false, message: "I'm sorry. I'm afraid I can't do that.", error})})
 });

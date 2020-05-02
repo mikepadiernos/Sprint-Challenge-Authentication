@@ -5,7 +5,7 @@
 const jwt = require('jsonwebtoken');
 const secret = require('./auth-secret.js');
 
- const restrictor = (req, res, next) => {
+ const authenticator = (req, res, next) => {
   const token = req.headers.authorization;
 
   token
@@ -29,6 +29,6 @@ const generator = function genToken(user) {
  }
 
 module.exports = {
-  restrictor,
+  authenticator,
   generator
 }
