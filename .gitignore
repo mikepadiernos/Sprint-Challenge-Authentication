@@ -78,3 +78,8 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+.idea/
+/pnpm-lock.yaml
+/package-lock.json
+/yarn.lock
